@@ -1,0 +1,14 @@
+name: uber
+title: uber
+username:
+account: ehando
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8852921
+bundleId: 7089969
+url: https://ehando.shinyapps.io/uber/
+when: 1681483200.09452
+lastSyncTime: 1681483200.09454
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitattributes|.RData|README.md
