@@ -5,10 +5,10 @@ account: ehando
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8852921
-bundleId: 7089969
+bundleId: 7109680
 url: https://ehando.shinyapps.io/uber/
-when: 1681483200.09452
-lastSyncTime: 1681483200.09454
+when: 1681917192.22909
+lastSyncTime: 1681917192.22911
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .gitattributes|.RData|README.md
+ignoredFiles: .gitattributes|.RData|README.md|raw_data
