@@ -13,7 +13,7 @@ library(shiny)
 library(modelr)
 ```
 ---
-## Data Prep
+## Data Prep :arrows_counterclockwise:
 
 - Read csv files, bind rows to one dataframe, and add columns for hour, month, weekday, day of the month, and week
 ```
@@ -75,7 +75,7 @@ daily <- df %>%
   summarise(n = n())
 ```
 ---
-## Analysis
+## Analysis :mag:
 ### Shinyapp UI
 - I made a new tab for each chart, some tabs have a chart and a pivot table. I also made a separate tab for the leaflet map and for the model.
 ```
@@ -248,3 +248,5 @@ output$daily_pivot <- renderTable({
       geom_line(size = 0.8) 
   })
 ```
+## Link to Shinyapp :link:
+https://ehando.shinyapps.io/uber/
