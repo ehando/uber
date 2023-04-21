@@ -77,33 +77,68 @@ daily <- df %>%
 ---
 ## Analysis :mag:
 ### Shinyapp UI
-- I made a new tab for each chart, some tabs have a chart and a pivot table. I also made a separate tab for the leaflet map and for the model.
+- I made a new tab for each chart, some tabs have a chart and a pivot table. I also made a separate tab for the leaflet map and for the model. Each tab has a short comment about what is displayed on that tab.
 ```
 ui <- fluidPage(
   titlePanel("Uber Trips Analysis"),
     
     mainPanel(
       tabsetPanel(
-        tabPanel("Monthly Trips", plotOutput("monthly_plot")),
+        tabPanel("Monthly Trips",
+                 fluidRow(
+                   column(12, textOutput('comment2')),
+                   column(12, plotOutput("monthly_plot"))
+                   )),
         tabPanel("Hourly Trips",
                  fluidRow(
+                   column(12, textOutput('comment1')),
                    column(12, plotOutput("hourly_plot")),
                    column(2, tableOutput("hourly_pivot")))
                  ),
         tabPanel("Daily Trips",
                  fluidRow(
+                   column(12, textOutput('comment3')),
                    column(12, plotOutput("daily_plot")),
                    column(2, tableOutput("daily_pivot")))
                 ),
-        tabPanel("Trips by Weekday & Month", plotOutput("weekday_month_plot")),
-        tabPanel("Trips by Base & Month", plotOutput("base_month_plot")),
-        tabPanel("Heatmap of Hour & Day", plotOutput("hour_day_heatmap")),
-        tabPanel("Heatmap of Month & Day", plotOutput("month_day_heatmap")),
-        tabPanel("Heatmap of Month & Week", plotOutput("month_week_heatmap")),
-        tabPanel("Heatmap of Base & Weekday", plotOutput("base_weekday_heatmap")),
-        tabPanel("Leaflet Map", leafletOutput("map")),
+        tabPanel("Trips by Weekday & Month",
+                 fluidRow(
+                   column(12, textOutput('comment4')),
+                   column(12, plotOutput("weekday_month_plot"))
+                )),
+        tabPanel("Trips by Base & Month",
+                 fluidRow(
+                   column(12, textOutput('comment5')),
+                   column(12, plotOutput("base_month_plot"))
+                )),
+        tabPanel("Heatmap of Hour & Day",
+                 fluidRow(
+                   column(12, textOutput('comment6')),
+                   column(12, plotOutput("hour_day_heatmap"))
+                )),
+        tabPanel("Heatmap of Month & Day",
+                 fluidRow(
+                   column(12, textOutput('comment7')),
+                   column(12, plotOutput("month_day_heatmap"))
+                )),
+        tabPanel("Heatmap of Month & Week",
+                 fluidRow(
+                   column(12, textOutput('comment8')),
+                   column(12, plotOutput("month_week_heatmap"))
+                )),
+        tabPanel("Heatmap of Base & Weekday",
+                 fluidRow(
+                   column(12, textOutput('comment9')),
+                   column(12, plotOutput("base_weekday_heatmap"))
+                )),
+        tabPanel("Leaflet Map",
+                 fluidRow(
+                   column(12, textOutput('comment10')),
+                   column(12, leafletOutput("map"))
+                )),
         tabPanel("Model",
                  fluidRow(
+                   column(12, textOutput('comment11')),
                    column(12, plotOutput("mod1")),
                    column(12, plotOutput("mod2")))
                 ))))
@@ -226,7 +261,7 @@ output$daily_pivot <- renderTable({
     addMarkers(data = map, lat = ~Lat, lng = ~Lon)
   })
 ```
-- For the model I made a two models showing the trend over time. One shows the overall trends and one shows the trend by weekday
+- For the model I made a model predicting trips over time. One shows the overall fit and one shows the fit by weekday
 ```
   output$mod1 <- renderPlot({
     mod <- lm(n ~ weekday, data = daily)
