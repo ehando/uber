@@ -2,6 +2,7 @@
 *Analyzing Uber trips from April to September.*
 ---
 ## Libraries :book:
+- I used shiny to create the Shinyapp, ggplot2 to create charts, modelr to create the model, viridis to have a colorblind-friendly palette, and leaflet to make a map
 ```
 library(tidyverse)
 library(leaflet)
@@ -144,7 +145,7 @@ ui <- fluidPage(
                 ))))
 ```
 ### Charts, Pivot Tables, Map, and Models
-- Made charts in the Shiny server. Most of the charts were made in similar fashion, so I will only show code for one of each different type.
+- Made charts in the Shiny server using the data I read into this file. The files consisted of the pivot tables I created previously
 
 - Pivot table and chart of Trips by the hour
 ```
