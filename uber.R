@@ -28,26 +28,61 @@ ui <- fluidPage(
     
     mainPanel(
       tabsetPanel(
-        tabPanel("Monthly Trips", plotOutput("monthly_plot")),
+        tabPanel("Monthly Trips",
+                 fluidRow(
+                   column(12, textOutput('comment2')),
+                   column(12, plotOutput("monthly_plot"))
+                   )),
         tabPanel("Hourly Trips",
                  fluidRow(
+                   column(12, textOutput('comment1')),
                    column(12, plotOutput("hourly_plot")),
                    column(2, tableOutput("hourly_pivot")))
                  ),
         tabPanel("Daily Trips",
                  fluidRow(
+                   column(12, textOutput('comment3')),
                    column(12, plotOutput("daily_plot")),
                    column(2, tableOutput("daily_pivot")))
                 ),
-        tabPanel("Trips by Weekday & Month", plotOutput("weekday_month_plot")),
-        tabPanel("Trips by Base & Month", plotOutput("base_month_plot")),
-        tabPanel("Heatmap of Hour & Day", plotOutput("hour_day_heatmap")),
-        tabPanel("Heatmap of Month & Day", plotOutput("month_day_heatmap")),
-        tabPanel("Heatmap of Month & Week", plotOutput("month_week_heatmap")),
-        tabPanel("Heatmap of Base & Weekday", plotOutput("base_weekday_heatmap")),
-        tabPanel("Leaflet Map", leafletOutput("map")),
+        tabPanel("Trips by Weekday & Month",
+                 fluidRow(
+                   column(12, textOutput('comment4')),
+                   column(12, plotOutput("weekday_month_plot"))
+                )),
+        tabPanel("Trips by Base & Month",
+                 fluidRow(
+                   column(12, textOutput('comment5')),
+                   column(12, plotOutput("base_month_plot"))
+                )),
+        tabPanel("Heatmap of Hour & Day",
+                 fluidRow(
+                   column(12, textOutput('comment6')),
+                   column(12, plotOutput("hour_day_heatmap"))
+                )),
+        tabPanel("Heatmap of Month & Day",
+                 fluidRow(
+                   column(12, textOutput('comment7')),
+                   column(12, plotOutput("month_day_heatmap"))
+                )),
+        tabPanel("Heatmap of Month & Week",
+                 fluidRow(
+                   column(12, textOutput('comment8')),
+                   column(12, plotOutput("month_week_heatmap"))
+                )),
+        tabPanel("Heatmap of Base & Weekday",
+                 fluidRow(
+                   column(12, textOutput('comment9')),
+                   column(12, plotOutput("base_weekday_heatmap"))
+                )),
+        tabPanel("Leaflet Map",
+                 fluidRow(
+                   column(12, textOutput('comment10')),
+                   column(12, leafletOutput("map"))
+                )),
         tabPanel("Model",
                  fluidRow(
+                   column(12, textOutput('comment11')),
                    column(12, plotOutput("mod1")),
                    column(12, plotOutput("mod2")))
                 )
@@ -172,7 +207,7 @@ server <- function(input, output) {
   #Model
   output$mod1 <- renderPlot({
     mod <- lm(n ~ weekday, data = daily)
-
+    
     daily <- daily %>%
       add_residuals(mod)
     daily %>%
@@ -189,6 +224,53 @@ server <- function(input, output) {
       geom_ref_line(h = 0) +
       geom_line(size = 0.8) 
   })
+  
+  output$comment1 <- renderText({
+    "Pivot table and chart of trips by the hour"  
+  })
+  
+  output$comment2 <- renderText({
+    "Chart of trips by month and hour"
+  })
+  
+  output$comment3 <- renderText({
+    "Pivot and chart of trips taken every day of the month"
+  })
+  
+  output$comment4 <- renderText({
+    "Chart of trips by day and month"
+  })
+  
+  output$comment5 <- renderText({
+    "Chart of trips by base and month"
+  })
+  
+  output$comment6 <- renderText({
+    "Heatmap of trips by hour and day"
+  })
+  
+  output$comment7 <- renderText({
+    "Heatmap of trips by month and day"
+  })
+  
+  output$comment8 <- renderText({
+    "Heatmap of trips by month and week"
+  })
+  
+  output$comment9 <- renderText({
+    "Heatmap of trips by base and day of the week"
+  })
+  
+  output$comment10 <- renderText({
+    "Leaflet map showing the top 20 busiest locations in the data"
+  })
+  
+  output$comment11 <- renderText({
+    "Model that shows actual versus expected trips.
+     The first chart shows overall fit and the second one shows by weekday"
+  })
+  
+  
 }  
 
 shinyApp(ui, server)
